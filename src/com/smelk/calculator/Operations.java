@@ -1,6 +1,7 @@
 package com.smelk.calculator;
 
-import java.util.function.DoubleBinaryOperator;
+import java.util.function.BinaryOperator;
+
 
 public enum Operations {
 
@@ -13,9 +14,9 @@ public enum Operations {
     SPECIAL("$", (firstValue, secondValue) -> Math.pow((firstValue + secondValue) / firstValue + 117, secondValue));
 
     private final String operator;
-    private final DoubleBinaryOperator result;
+    private final BinaryOperator<Double> result;
 
-    Operations(String operator, DoubleBinaryOperator result) {
+    Operations(String operator, BinaryOperator<Double> result) {
         this.operator = operator;
         this.result = result;
     }
@@ -25,6 +26,6 @@ public enum Operations {
     }
 
     public double getResult(double firstValue, double secondValue) {
-        return result.applyAsDouble(firstValue, secondValue);
+        return result.apply(firstValue, secondValue);
     }
 }
