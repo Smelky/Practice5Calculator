@@ -1,30 +1,21 @@
 package com.smelk.calculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Calculator {
 
-    public void calculate(double firstValue, double secondValue, char operation) {
-        List<Double> values = new ArrayList<Double>();
-        values.add(firstValue);
-        values.add(secondValue);
+    public static void calculate(double firstValue, double secondValue, char operation) {
         String function = String.valueOf(operation);
-        try {
-            System.out.println(calculator(values, function));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println(calculateTwoValues(firstValue, secondValue, function));
 
     }
 
-    private double calculator(List<Double> values, String function) {
+    private static double calculateTwoValues(double firstValue, double secondValue, String function) {
         Operations result = Arrays.stream(Operations.values())
                 .filter(operations -> operations.getOperator().equals(function))
                 .findFirst()
                 .orElseThrow();
-        return result.getResult(values.get(0), values.get(1));
+        return result.getResult(firstValue, secondValue);
 
     }
 }
